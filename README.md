@@ -10,7 +10,7 @@ Les étudiants remplissent les fiches de vœux. Le responsable des projets regro
 un tableur puis le logiciel d’attribution distribue les sujets et propose les combinaisons.
 L’idée est de réaliser un site web sur lequel les enseignants déposeront leurs sujets qui seront validés par
 l’administrateur. Ensuite les étudiants auront quelques jours pour faire leurs vœux. L’algorithme
-d’optimisation actuellement utilisé sera repris (https://jb.vioix.fr/attribution-de-projets/). A l’issue de ce
+d’optimisation actuellement utilisé sera repris [attribution de projets](https://jb.vioix.fr/attribution-de-projets/). A l’issue de ce
 processus, l’administrateur réglera les cas équivalents.
 
 Domaine de compétences : Informatique
