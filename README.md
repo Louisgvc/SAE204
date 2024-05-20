@@ -1,6 +1,6 @@
 #SAE 204
 
-##6 – Gestion des projets tuteurés
+##6 Gestion des projets tuteurés
 
 Objectif :
 
