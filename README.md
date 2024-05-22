@@ -14,3 +14,7 @@ d’optimisation actuellement utilisé sera repris [attribution de projets](http
 processus, l’administrateur réglera les cas équivalents.
 
 Domaine de compétences : Informatique
+
+3 types de profils
+- Admin : définit les dates limites (dépôt de sujet pour les enseignants, voeux des étudiants)
+
