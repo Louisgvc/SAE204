@@ -13,8 +13,18 @@ l’administrateur. Ensuite les étudiants auront quelques jours pour faire leur
 d’optimisation actuellement utilisé sera repris [attribution de projets](https://jb.vioix.fr/attribution-de-projets/). A l’issue de ce
 processus, l’administrateur réglera les cas équivalents.
 
-Domaine de compétences : Informatique
----------------------------------------------------------------------------------------------------
+---
+
+### SQL/BBD
+
+- Premiere page :
+    - BBD -> Admin/Profs/Etudiants
+    - BBD -> Sujet      
+
+
+### Domaine de compétences : Informatique
+
+
 3 types de profils :
 - Admin :
     - définit les dates limites
