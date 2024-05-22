@@ -19,7 +19,8 @@ processus, l’administrateur réglera les cas équivalents.
 
 - Premiere page :
     - BBD -> Admin/Profs/Etudiants
-    - BBD -> Sujet      
+- BBD Sujet
+    - BBD -> Sujet reel ( a utiliser ) , Sujet (Idee)      
 
 
 ### Domaine de compétences : Informatique
