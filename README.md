@@ -20,24 +20,27 @@ processus, l’administrateur réglera les cas équivalents.
 - Premiere page :
     - BBD -> Admin/Profs/Etudiants
 - BBD Sujet
-    - BBD -> Sujet reel ( a utiliser ) , Sujet (Idee)      
+    - BBD -> Sujet profs / etudiants , Sujet (Idee)      
 
 
 ### Domaine de compétences : Informatique
 
 
 3 types de profils :
+
 - Admin :
     - définit les dates limites
-       - dépôt de sujets pour les enseignants
+       - dépôt de sujets pour les enseignants option comme brouillons (vue que par l'enseignats)  
        - voeux des étudiants
     - approuve les sujets proposés par les enseignants et les publie sur le site
     - lance l'attribution des sujets aux étudiants et publie les résultats
+
 - Profs : proposent des sujets avec
    - titre
    - description
    - mots-clés (domaine de compétences)
    - niveau de difficulté
+
 - Etudiants 
   - Se connecter avec leurs identifiants sur le site  
   - Choisir son binôme  
