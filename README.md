@@ -21,11 +21,13 @@ Domaine de compétences : Informatique
 - Profs : proposent des sujets avec titre, description, mots-clés (domaine de compétences), niveau de difficulté
 
 
-=======
+---
 
 
- - etudiants -> * Se conneter avec c'es identifiant sur la page
-                * Choisir son binome celon son groupe d'etude de preference
-                * Faire une demande au binome choisit , pour que lui accecepte aussi
+ - etudiants ->
+                - Se conneter avec c'est identifiant sur la page
+                - Choisir son binome celon son groupe d'etude de preference
+                - Faire une demande au binome choisit , pour que lui accecepte aussi
+                - Choisir 5 sujet (max)dans la liste et les mettres dans un ordre de preference
+                - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.
 
->>>>>>> 0fbc47b (ui)
