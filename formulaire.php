@@ -1,20 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <title>Accueil</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="BaseBootstrap/css/style.css">
+	
+  </head>
+
+  <body>
+
+    <h1>Bienvenue</h1>
+
+    <form action="accueil.php" method="get">
+      <fieldset>
+        <legend>Connexion</legend>
+        <label for="login">Identifiant : </label>
+        <input type="text" name="login">
+        <label for="mdp">Mot de passe : </label>
+        <input type="text" name="mdp">
+      </fieldset>
+      <input type="submit" value="Se connecter">
+    </form>
+
 <?php
-//echo 'Info pour debug';
-//echo '<pre>';
-//echo "Variable Get : "; print_r($_GET);
-//echo "Variable POS : "; print_r($_SESSION);
-// echo '</pre>';
-
-//recupere les donne du formulaire
-
-$prenom=$_GET["prenom"];
-$nom=$_GET["nom"];
-$email=$_GET["email"];
-$password=$_GET["password"];
-echo "<p>" ;
-echo "<p>nom : $nom prenom :  $prenom </p>";
-echo "<p>mail : $email </p>";
-echo "<p>mot de passe : $password</p>";
 
 try {
     $servername = "127.0.0.1";
@@ -41,13 +51,14 @@ try {
     //Execute la reqque de l'insertion
     $requeteSQL->execute();
 
-
-
 }
 catch (PDOException $e)
 {
     die("Erreur : ").$e-> getMessage();
 }
-
 //connexion a la BDD
 ?>
+
+</body>
+</html>
+
