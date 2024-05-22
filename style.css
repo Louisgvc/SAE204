@@ -1,0 +1,29 @@
+label {
+    display: block;
+}
+
+form {
+    margin:auto;
+    width:65%;
+    padding:1em;
+    background-color: #8cbbff;
+    border-radius: 15px;
+}
+
+fieldset {
+    padding:1em;
+}
+
+legend {
+    font-weight: bold;
+    font-size: large;
+}
+
+input[type="text"] {
+    width: 70%;
+}
+
+input[type="submit"] {
+    font-size:large;
+    padding:0.3em;
+}
