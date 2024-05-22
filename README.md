@@ -14,9 +14,18 @@ d’optimisation actuellement utilisé sera repris [attribution de projets](http
 processus, l’administrateur réglera les cas équivalents.
 
 Domaine de compétences : Informatique
+<<<<<<< HEAD
 ---------------------------------------------------------------------------------------------------
 3 types de profils :
 - Admin : définit les dates limites (dépôt de sujets pour les enseignants, voeux des étudiants), approuve les sujets proposés par les enseignants et les publie sur le site, lance l'attribution des sujets aux étudiants et publie les résultats
 - Profs : proposent des sujets avec titre, description, mots-clés (domaine de compétences), niveau de difficulté
 
 
+=======
+
+
+ - etudiants -> * Se conneter avec c'es identifiant sur la page
+                * Choisir son binome celon son groupe d'etude de preference
+                * Faire une demande au binome choisit , pour que lui accecepte aussi
+
+>>>>>>> 0fbc47b (ui)
