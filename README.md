@@ -25,9 +25,9 @@ Domaine de compétences : Informatique
 
 
  - etudiants ->
-                - Se conneter avec c'est identifiant sur la page
-                - Choisir son binome celon son groupe d'etude de preference
-                - Faire une demande au binome choisit , pour que lui accecepte aussi
-                - Choisir 5 sujet (max)dans la liste et les mettres dans un ordre de preference
-                - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.
+                - Se conneter avec c'est identifiant sur la page  
+                - Choisir son binome celon son groupe d'etude de preference  
+                - Faire une demande au binome choisit , pour que lui accecepte aussi  
+                - Choisir 5 sujet (max)dans la liste et les mettres dans un ordre de preference  
+                - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.  
 
