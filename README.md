@@ -54,7 +54,7 @@ processus, l’administrateur réglera les cas équivalents.
 $str = "Shannon2";
 $pattern = "/Shannon.*/"; 
 echo preg_match($pattern, $str);
-
+if 
 ?>
 
 ```
