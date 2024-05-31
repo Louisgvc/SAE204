@@ -46,5 +46,16 @@ processus, l’administrateur réglera les cas équivalents.
   - Choisir son binôme  
   - Faire une demande de sujet au binome, qui devra être approuvée par le binôme  
   - Choisir 5 sujets dans la liste et les classer par ordre de preference  
-  - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.  
+  - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.
+ 
+```php
+
+<?php
+$str = "Shannon2";
+$pattern = "/Shannon.*/"; 
+echo preg_match($pattern, $str);
+
+?>
+
+```
 
