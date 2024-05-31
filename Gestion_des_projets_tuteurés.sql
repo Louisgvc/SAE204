@@ -47,17 +47,25 @@ INSERT INTO `Admis` (`id_admis`, `mdp`,) VALUES
 
 CREATE TABLE
     `BUTRT1_lg409538`.`Etudiants` ( 
-      `id_etud` VARCHAR NOT NULL AUTO_INCREMENT ,
-      `mdp` VARCHAR NOT NULL ,
+        `id_etud` VARCHAR NOT NULL AUTO_INCREMENT ,
+        `nom` VARCHAR NOT NULL AUTO_INCREMENT ,
+        `prenom` VARCHAR NOT NULL AUTO_INCREMENT ,
+        `email ` VARCHAR NOT NULL AUTO_INCREMENT ,
+        `groupe` VARCHAR NOT NULL AUTO_INCREMENT ,
+        `mdp` VARCHAR NOT NULL ,
+        
       PRIMARY KEY (`id_etud`)) ENGINE = InnoDB;
 
 --
 -- Déchargement des données de la table `Etudiants`
 --
 
-INSERT INTO `Etudiants` (`id_etud`, `mdp`,) VALUES
+INSERT INTO `Etudiants` (`id_etud`, `nom`,`prenom`,`email `,`groupe`,`mdp`) VALUES
 
---Commme groooos
+('etudiant', 'etud', 'oui', 'etudiant@gamil.com', 'Turing', 'etudiant'),
+('lg_409538', 'Granvisir-clerc', 'Louis', 'louis.granvisir-clerc@iut-dijon.u-bourgogne.fr', 'Huffman', 'kkk'),
+('jesuisko', 'bgg', 'leboss', 'bg@iut-dijon.u-bourgogne.fr', 'Shannon1', 'ooo'),
+
 
 
 CREATE TABLE
