@@ -63,7 +63,7 @@ if
 ```
 ---
 
-# Tips Install laravel mysql
+# Tips 
 
 ## Install laravel with mysql
 ```
@@ -75,6 +75,7 @@ cd example-app
  
 php artisan serve
 ```
+### Change file .env
 
 ```
 APP_NAME=Laravel
