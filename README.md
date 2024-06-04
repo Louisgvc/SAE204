@@ -65,6 +65,7 @@ if
 
 # Tips Install laravel mysql
 
+## Install laravel with mysql
 ```
 composer create-project laravel/laravel example-app
 ```
@@ -92,4 +93,14 @@ DB_PASSWORD=
 
 ```
 php artisan migrate
+```
+
+## Install Backpack
+
+```
+composer require backpack/crud
+```
+
+```
+php artisan backpack:install
 ```
