@@ -1,3 +1,6 @@
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+
+
 # SAE 204
 
 ## 6-Gestion des projets tuteurés
@@ -20,7 +23,7 @@ processus, l’administrateur réglera les cas équivalents.
 - Premiere page :
     - BBD -> Admin/Profs/Etudiants
 - BBD Sujet
-    - BBD -> Sujet profs / etudiants , Sujet (Idee)      
+    - BBD -> Sujet profs / etudiants , Sujet (Idee)
 
 
 ### Domaine de compétences : Informatique
@@ -30,26 +33,26 @@ processus, l’administrateur réglera les cas équivalents.
 
 - Admin :
     - définit les dates limites
-       - dépôt de sujets pour les enseignants option comme brouillons (vue que par l'enseignats)  
-       - voeux des étudiants
+        - dépôt de sujets pour les enseignants option comme brouillons (vue que par l'enseignats)
+        - voeux des étudiants
     - approuve les sujets proposés par les enseignants et les publie sur le site
     - lance l'attribution des sujets aux étudiants et publie les résultats
 
 - Profs : proposent des sujets avec
-   - titre
-   - description
-   - mots-clés (domaine de compétences)
-   - niveau de difficulté
+    - titre
+    - description
+    - mots-clés (domaine de compétences)
+    - niveau de difficulté
 
 - Etudiants
-  - Permission :
-    - envoyer requete a son binome mail
-    - trier sujet par ordre de preference
-        - Se connecter avec leurs identifiants sur le site
-        - Choisir son binôme
-        - Faire une demande de sujet au binome, qui devra être approuvée par le binôme
-        - Choisir 5 sujets dans la liste et les classer par ordre de preference
-        - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.
+    - Permission :
+        - envoyer requete a son binome mail
+        - trier sujet par ordre de preference
+            - Se connecter avec leurs identifiants sur le site
+            - Choisir son binôme
+            - Faire une demande de sujet au binome, qui devra être approuvée par le binôme
+            - Choisir 5 sujets dans la liste et les classer par ordre de preference
+            - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.
 
 ```php
 
@@ -63,10 +66,7 @@ if
 ```
 ---
 
-# Tips 
-
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+# Tips
 
 ## Install laravel with mysql
 ```
@@ -111,7 +111,6 @@ php artisan backpack:install
 ---
 
 ### Exemple de creation d'une page Sujet
-
 ```
 php artisan make:model Sujet -m
 ```
@@ -145,6 +144,7 @@ php artisan backpack:crud Sujet
 php artisan backpack:build
 
 ```
+
 dans SujetCrudController
 ```
   CRUD::field("numero")->label("Numero de sujet")->type("text");
