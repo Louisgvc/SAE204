@@ -107,11 +107,17 @@ php artisan backpack:install
 ```
 ---
 
-### Sujet
+### Exemple de creation d'une page Sujet
+
 ```
 php artisan make:model Sujet -m
 ```
+Aller dans Sujet.php et ajouter cet ligne
 
+```
+protected $fillable = ["numero", "titre", "description", "mot_cle", "niveau"];
+
+```
 Aller dans database/migrations
 
 puis ajouter le descriptif de la page voulu
@@ -119,11 +125,11 @@ puis ajouter le descriptif de la page voulu
 ```
 Schema::create('sujets', function (Blueprint $table) {
             $table->id();
+            $table->string('numero')->unique();
             $table->string('titre');
-            $table->text('description');
-            $table->string('numero')->unique(); 
-            $table->string('keywords')->nullable(); //mots-clés
-            $table->enum('difficulter', ['debutant', 'facile', 'modere', 'difficile', 'extreme']);
+            $table->longText('description');
+            $table->string("mot_cle");
+            $table->enum("niveau",["facile", "moyen","difficile", "expert"]);
             $table->timestamps();
         });
 ```
@@ -131,98 +137,26 @@ Schema::create('sujets', function (Blueprint $table) {
 ```
 php artisan migrate
 
-php artisan backpack:crud sujet
+php artisan backpack:crud Sujet
+
+php artisan backpack:build
 
 ```
 
 dans SujetCrudController
 ```
-        $this->crud->setValidation(\App\Http\Requests\SujetRequest::class);
+  CRUD::field("numero")->label("Numero de sujet")->type("text");
+        CRUD::field("titre")->label("Titre")->type("text");
+        CRUD::field("description")->label("Description")->type("textarea");
+        CRUD::field("mot_cle")->label("Mot cle")->type("text");
+        CRUD::field("niveau")->label("Niveau")->type("select_from_array")
+            ->options([
+                "facile" => "Facile",
+                "moyen" => "Moyen",
+                "difficile" => "Difficile",
+                "expert" => "Expert"
+            ]);
 
-        $this->crud->addField([
-            'name' => 'numero',
-            'type' => 'text',
-            'label' => 'Numéro de Sujet',
-        ]);
-        $this->crud->addField([
-            'name' => 'titre',
-            'type' => 'text',
-            'label' => 'Titre',
-        ]);
-        $this->crud->addField([
-            'name' => 'description',
-            'type' => 'textarea',
-            'label' => 'description',
-        ]);
-        $this->crud->addField([
-            'name' => 'keywords',
-            'type' => 'text',
-            'label' => 'Mots-clés',
-        ]);
-        $this->crud->addField([
-            'name' => 'difficulter',
-            'type' => 'enum',
-            'label' => 'Niveau de Difficulté',
-            'options' => ['debutant', 'facile', 'modere', 'difficile', 'extreme'], // Options pour le niveau de difficulté
-            'allows_null' => true,
-        ]);
-
-
-```
-Puis dans SujetController
-
-```
-lass SujetController extends Controller
-{
-    public function index()
-    {
-        $sujets = Sujet::all();
-        return view('sujets.index', compact('sujets'));
-    }
-
-    public function show($id)
-    {
-        $sujet = Sujet::findOrFail($id);
-        return view('sujets.show', compact('sujet'));
-    }
-}
-```
-Maintenant faire 2 fichiers dans resources/sujets
-
-index.blade.php : 
-```
-@extends('layouts.app')
-
-@section('content')
-    <h1>Sujets</h1>
-    <ul>
-        @foreach ($sujets as $sujet)
-            <li>
-                <a href="{{ route('sujets.show', $sujet->id) }}">{{ $sujet->numero }} - {{ $sujet->titre }}</a>
-                <p>{{ $sujet->keywords }}</p>
-                <p>{{ $sujet->difficulter }}</p>
-            </li>
-        @endforeach
-    </ul>
-@endsection
-```
-show.blade.php : 
-```
-@extends('layouts.app')
-
-@section('content')
-    <h1>{{ $sujet->numero }} - {{ $sujet->titre }}</h1>
-    <p>{{ $sujet->description }}</p>
-    <p><strong>Mots-clés:</strong> {{ $sujet->keywords }}</p>
-    <p><strong>Niveau de Difficulté:</strong> {{ $sujet->difficulter }}</p>
-    <a href="{{ route('sujets.index') }}">Retour aux Sujets</a>
-@endsection
-```
-Enfain ajout les routes routes/web.php
-
-```
-Route::get('/sujets', [SujetController::class, 'index'])->name('sujets.index');
-Route::get('/sujets/{id}', [SujetController::class, 'show'])->name('sujets.show');
 ```
 
 
