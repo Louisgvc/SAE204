@@ -50,6 +50,15 @@ processus, l’administrateur réglera les cas équivalents.
         - Faire une demande de sujet au binome, qui devra être approuvée par le binôme
         - Choisir 5 sujets dans la liste et les classer par ordre de preference
         - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.
+     
+
+Choisier un etudiant dans une liste déroulante, puis les ajoute dans un groupe {a...z}
+
+```sql
+Select u.nom, u.prenom from users u
+inner join roles r
+where r.nom = "etudiant";
+```
 
 ```php
 
