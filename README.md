@@ -43,13 +43,18 @@ processus, l’administrateur réglera les cas équivalents.
 
 - Etudiants
   - Permission :
-    - envoyer requete a son binome mail
-    - trier sujet par ordre de preference
-        - Se connecter avec leurs identifiants sur le site
-        - Choisir son binôme
-        - Faire une demande de sujet au binome, qui devra être approuvée par le binôme
-        - Choisir 5 sujets dans la liste et les classer par ordre de preference
+    - Se connecter avec leurs identifiants sur le site
+    - Choisir son binôme
+    - envoyer requete mail/notification pour demand de binome ou trinome
+    - Faire une demande de sujet au binome, qui devra être approuvée par le binôme
+    - Choisir 5 sujets dans la liste et les classer par ordre de preference
+        - trier sujet par ordre de preference
         - Attendre la validation des 2/3 etudiants sur l'attribution des sujets et de l'odre.
+    
+    
+   
+   
+   
      
 
 Choisier un etudiant dans une liste déroulante, puis les ajoute dans un groupe {a...z}
