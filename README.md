@@ -174,5 +174,107 @@ dans SujetCrudController
             ]);
 
 ```
+### Liste déroulante avec base de données
+Créer une table et la définir
+```
+php artisan make:migration create_groups_table
+```
+Dans le fichier de migration, créer des variables avec des requêtes de BDD et les utiliser dans le Schema::create en ajoutant use ($variable). Ne pas oublier d'importer les classes des requêtes (ici User et Sujet)
+```
+<?php
 
+use App\Models\User;
+use App\Models\Sujet;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        $etudiants = User::pluck('name')->toArray();
+        $sujetsTitres = Sujet::pluck('titre')->toArray();
+        
+        Schema::create('groups', function (Blueprint $table) use ($etudiants, $sujetsTitres) {
+            $table->id();
+            $table->timestamps();
+            $table->enum('binome1', $etudiants);
+            $table->enum('binome2', $etudiants);
+            $table->enum('sujet_titre', $sujetsTitres);
+        });
+    }
+```
+
+Faire la migration
+```
+php artisan migrate
+```
+
+Dans le modèle (ici app\Models\Group.php)
+Définir les champs que l'on ne peut pas modifier avec protected $guarded.
+Définir les champs que l'on peut modifier avec protected $fillable.
+```
+class Group extends Model
+{
+    use CrudTrait;
+    use HasFactory;
+
+    /*
+    |--------------------------------------------------------------------------
+    | GLOBAL VARIABLES
+    |--------------------------------------------------------------------------
+    */
+
+    protected $table = 'groups';
+    // protected $primaryKey = 'id';
+    // public $timestamps = false;
+    protected $guarded = ['id'];
+    protected $fillable = ['binome1','binome2','sujet_titre'];
+```
+
+Créer le crud controller
+```
+php artisan backpack:crud group
+```
+Dans le fichier GroupCrudController
+Ajouter les colonnes dans la fonction setupListOperation
+```
+    protected function setupListOperation()
+    {
+        CRUD::setFromDb(); // set columns from db columns.
+
+        /**
+         * Columns can be defined using the fluent syntax:
+         * - CRUD::column('price')->type('number');
+         */
+        CRUD::column('binome1');
+        CRUD::column('binome2');
+        CRUD::column('sujet_titre');
+    }
+```
+
+Dans la fonction setupCreateOperation définir les même variables que précédemment avec les requêtes et définir les champs ainsi
+```
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(GroupRequest::class);
+        CRUD::setFromDb(); // set fields from db columns.
+
+        /**
+         * Fields can be defined using the fluent syntax:
+         * - CRUD::field('price')->type('number');
+         */
+        $etudiants = User::pluck('name')->toArray();
+        $sujetsTitres = Sujet::pluck('titre')->toArray();
+
+        CRUD::setValidation(GroupRequest::class);
+        CRUD::field('binome1')->label('Choisissez votre nom')->type('select_from_array')->options($etudiants);
+        CRUD::field('binome2')->label('Choisissez votre binome')->type('select_from_array')->options($etudiants);
+        CRUD::field('sujet_titre')->label('Choisissez votre sujet')->type('select_from_array')->options($sujetsTitres);
+    }
+```
 
