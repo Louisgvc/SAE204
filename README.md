@@ -179,12 +179,11 @@ Créer une table et la définir
 ```
 php artisan make:migration create_groups_table
 ```
-Dans le fichier de migration, créer des variables avec des requêtes de BDD et les utiliser dans le Schema::create en ajoutant use ($variable). Ne pas oublier d'importer les classes des requêtes (ici User et Sujet)
+Définir la base de données ainsi :
 ```
 <?php
 
 use App\Models\User;
-use App\Models\Sujet;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -196,17 +195,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $etudiants = User::pluck('name')->toArray();
-        $sujetsTitres = Sujet::pluck('titre')->toArray();
         
-        Schema::create('groups', function (Blueprint $table) use ($etudiants, $sujetsTitres) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->enum('binome1', $etudiants);
-            $table->enum('binome2', $etudiants);
-            $table->enum('sujet_titre', $sujetsTitres);
+            $table->string('binome1');
+            $table->string('binome2');
         });
     }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('groups');
+    }
+};
 ```
 
 Faire la migration
@@ -233,7 +238,7 @@ class Group extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    protected $fillable = ['binome1','binome2','sujet_titre'];
+    protected $fillable = ['binome1','binome2'];
 ```
 
 Créer le crud controller
@@ -253,11 +258,10 @@ Ajouter les colonnes dans la fonction setupListOperation
          */
         CRUD::column('binome1');
         CRUD::column('binome2');
-        CRUD::column('sujet_titre');
     }
 ```
 
-Dans la fonction setupCreateOperation définir les même variables que précédemment avec les requêtes et définir les champs ainsi
+Dans la fonction setupCreateOperation définir :
 ```
     protected function setupCreateOperation()
     {
@@ -268,13 +272,63 @@ Dans la fonction setupCreateOperation définir les même variables que précéde
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
          */
-        $etudiants = User::pluck('name')->toArray();
-        $sujetsTitres = Sujet::pluck('titre')->toArray();
+        $etudiants = User::pluck('name','name')->toArray();
 
         CRUD::setValidation(GroupRequest::class);
         CRUD::field('binome1')->label('Choisissez votre nom')->type('select_from_array')->options($etudiants);
         CRUD::field('binome2')->label('Choisissez votre binome')->type('select_from_array')->options($etudiants);
-        CRUD::field('sujet_titre')->label('Choisissez votre sujet')->type('select_from_array')->options($sujetsTitres);
     }
 ```
+
+Dans le fichier GroupRequest.php : 
+
+```
+    public function rules()
+    {
+        return [
+            'binome1' => [
+                'required', 
+                Rule::unique('groups','binome1')->where(function ($query) {
+                    return $query->where('binome1', $this->binome1)
+                                ->orWhere('binome2', $this->binome1);
+            })],
+            'binome2' => [
+                'required', 
+                Rule::unique('groups','binome2')->where(function ($query) {
+                    return $query->where('binome1', $this->binome2)
+                                ->orWhere('binome2', $this->binome2);
+            })]
+        ];
+    }
+
+    /**
+     * Get the validation attributes that apply to the request.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'binome1' => 'premier partenaire',
+            'binome2' => 'deuxieme partenaire'
+        ];
+    }
+
+    /**
+     * Get the validation messages that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'binome1.unique' => "Cet utilisateur fait déjà partie d'un groupe.",
+            'binome2.unique' => "Cet utilisateur fait déjà partie d'un groupe."
+        ];
+    }
+}
+```
+
+
+
 
