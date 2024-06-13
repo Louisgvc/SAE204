@@ -329,6 +329,183 @@ Dans le fichier GroupRequest.php :
 }
 ```
 
+### GroupRequest.php
+```
+<?php
 
+namespace App\Http\Requests;
+
+use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+
+class GroupRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        // only allow updates if the user is logged in
+        return backpack_auth()->check();
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        $groupId = $this->route('group');
+        $loginUser = auth()->user()->name;
+
+        return [
+            'binome1' => [
+                'required', 
+                Rule::unique('groups','binome1')->where(function ($query) {
+                    return $query->where('binome1', $this->binome1)
+                                ->orWhere('binome2', $this->binome1);
+            })],
+            'binome2' => [
+                'required', 
+                Rule::unique('groups', 'binome1')->ignore($groupId), 
+                Rule::unique('groups', 'binome2')->ignore($groupId),
+                Rule::unique('groups', 'binome1')->ignore($loginUser),
+                Rule::unique('groups', 'trinome')->ignore($groupId)
+            ],
+            'trinome' => [
+                'different:binome2',
+                Rule::unique('groups', 'binome1')->ignore($groupId), 
+                Rule::unique('groups', 'binome2')->ignore($groupId),
+                Rule::unique('groups', 'trinome')->ignore($groupId)
+            ]
+        ];
+    }
+
+    /**
+     * Get the validation attributes that apply to the request.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'binome1' => 'premier partenaire',
+            'binome2' => 'deuxieme partenaire',
+            'trinome' => 'troisième partenaire'
+        ];
+    }
+
+    /**
+     * Get the validation messages that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'binome1.unique' => "Cet utilisateur fait déjà partie d'un groupe.",
+            'binome2.unique' => "Cet utilisateur fait déjà partie d'un groupe.",
+            'trinome.unique' => "Cet utilisateur fait déjà partie d'un groupe."
+        ];
+    }
+}
+
+```
+
+GroupCrudController.php
+```
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\User;
+use App\Http\Requests\GroupRequest;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+
+/**
+ * Class GroupCrudController
+ * @package App\Http\Controllers\Admin
+ * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
+ */
+class GroupCrudController extends CrudController
+{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+
+    /**
+     * Configure the CrudPanel object. Apply settings to all operations.
+     * 
+     * @return void
+     */
+    public function setup()
+    {
+        CRUD::setModel(\App\Models\Group::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/group');
+        CRUD::setEntityNameStrings('group', 'groups');
+    }
+
+    /**
+     * Define what happens when the List operation is loaded.
+     * 
+     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
+     * @return void
+     */
+    protected function setupListOperation()
+    {
+        CRUD::setFromDb(); // set columns from db columns.
+
+        /**
+         * Columns can be defined using the fluent syntax:
+         * - CRUD::column('price')->type('number');
+         */
+        //CRUD::column('binome1');
+        //CRUD::column('binome2');
+    }
+
+    /**
+     * Define what happens when the Create operation is loaded.
+     * 
+     * @see https://backpackforlaravel.com/docs/crud-operation-create
+     * @return void
+     */
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(GroupRequest::class);
+        CRUD::setFromDb(); // set fields from db columns.
+
+        /**
+         * Fields can be defined using the fluent syntax:
+         * - CRUD::field('price')->type('number');
+         */
+        $loginUser = auth()->user()->name;
+        $etudiants = User::role('etudiant')->where('name', '!=', $loginUser)->pluck('name', 'name')->toArray();
+
+        CRUD::setValidation(GroupRequest::class);
+        CRUD::field('binome1')->label('Votre nom')->type('select_from_array')->options([$loginUser => $loginUser]);
+        CRUD::field('binome2')->label('Choisissez votre binome')->type('select_from_array')->options($etudiants);
+        CRUD::field('trinome')->label('Choisissez votre trinome (optionnel)')->type('select_from_array')->options($etudiants);
+
+    }
+
+    /**
+     * Define what happens when the Update operation is loaded.
+     * 
+     * @see https://backpackforlaravel.com/docs/crud-operation-update
+     * @return void
+     */
+    protected function setupUpdateOperation()
+    {
+        $this->setupCreateOperation();
+    }
+}
+
+```
 
 
