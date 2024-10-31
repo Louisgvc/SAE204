@@ -57,24 +57,6 @@ processus, l’administrateur réglera les cas équivalents.
    
      
 
-Choisier un etudiant dans une liste déroulante, puis les ajoute dans un groupe {a...z}
-
-```sql
-Select u.nom, u.prenom from users u
-inner join roles r
-where r.nom = "etudiant";
-```
-
-```php
-
-<?php
-$str = "Shannon2";
-$pattern = "/Shannon.*/"; 
-echo preg_match($pattern, $str);
-if 
-?>
-
-```
 ---
 
 # Tips 
